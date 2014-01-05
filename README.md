@@ -48,6 +48,11 @@ Click the buttons to do things. Click points to change their color (green = posi
 Reload the page to clear everything.
 
 
+## Screenshot
+
+![Screenshot](http://etotheipi.org/discuss-o-matic-screenshot.png "Screenshot")
+
+
 ## License
 
 > Copyright (c) 2014, David Hollis
