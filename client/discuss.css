@@ -1,0 +1,12 @@
+body {
+    padding: 30px;
+}
+
+.no-topics {
+    margin-top: 4em;
+}
+
+footer, footer a {
+    margin-top: 4em;
+    color: #ccc;
+}
