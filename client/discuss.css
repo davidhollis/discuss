@@ -10,3 +10,7 @@ footer, footer a {
     margin-top: 4em;
     color: #ccc;
 }
+
+footer a {
+    text-decoration: underline;
+}
