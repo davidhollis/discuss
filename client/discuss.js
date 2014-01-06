@@ -5,6 +5,9 @@ Meteor.startup(function () {
 var Topics = new Meteor.Collection(null);
 var Points = new Meteor.Collection(null);
 
+var proRegex = new RegExp("^(for )", "i");
+var conRegex = new RegExp("^(against )", "i");
+
 function canAddATopic() {
     // We can have at most 4 topics, so we're allowed to add one if we have
     // strictly fewer than 4
@@ -42,6 +45,16 @@ Template.topic.points = function () {
 
 Template.topic.isBeingEdited = function () {
     return Session.equals('topicBeingEdited', this._id);
+}
+
+Template.topic.listStyle = function () {
+    if (proRegex.test(this.name)) {
+        return 'alert alert-success';
+    } else if (conRegex.test(this.name)) {
+        return 'alert alert-danger';
+    } else {
+        return '';
+    }
 }
 
 function commitName(topic) {
@@ -109,7 +122,13 @@ Template.topic.events({
 
 // == Point ==
 Template.point.pointClass = function () {
-    if (this.status == 'positive') {
+    var parent = Topics.findOne({_id: this.topicId});
+    
+    if (proRegex.test(parent.name) || conRegex.test(parent.name)) {
+        // A topic which is a pro or a con topic overrides any styling on the
+        // point.
+        return '';
+    } else if (this.status == 'positive') {
         return 'alert-success';
     } else if (this.status == 'negative') {
         return 'alert-danger';
